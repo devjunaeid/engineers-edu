@@ -12,7 +12,20 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontFamily: {
+        lato: ['Lato', 'sans-serif'],
+        notoBd: ['Noto Sans Bengali', 'sans-serif'],
+        anekBd: ['Anek Bangla', 'sans-serif'],
+        baloodaBd: ['Baloo Da 2', 'sans-serif'],
+        trioBd: ['Tiro Bangla', 'serif'],
+        roboto: ['Roboto', 'sans-serif'],
+        raleway: ['Raleway', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
+      },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light", "cupcake"],
+  },
 }
