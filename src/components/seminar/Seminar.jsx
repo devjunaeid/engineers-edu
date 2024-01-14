@@ -32,7 +32,7 @@ function Seminar() {
           </thead>
           <tbody className="text-sm md:text-lg">
             {
-                data.map((item, index) => (
+                data?.map((item, index) => (
                     <tr key={item.id} className="hover:bg-amber-100">
                         <th>{index + 1}</th>
                         <td>{item.title}</td>

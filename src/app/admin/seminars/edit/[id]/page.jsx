@@ -11,14 +11,11 @@ async function getData(id) {
 
 async function page({params}) {
   const id = params.id;
-  // console.log(id);
   const data = await getData(id);
-  // console.log(data);
   return (
-    <div>
-      <h1>Edit a Seminar</h1>
+    <div className="relative">
+      <h1 className="md:text-6xl font-bold uppercase text-center">Edit a Seminar</h1>
       <EditSeminars dbData={data} id={id}/>
-      <button className="btn">Delete</button>
     </div>
   )
 }

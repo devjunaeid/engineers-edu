@@ -1,8 +1,8 @@
 import { Semi } from "@/utils/postgreConnect";
 import { NextResponse } from "next/server";
 
-export const GET = async (req, {params}) => {
-  const {id} = params;
+export const GET = async (req, { params }) => {
+  const { id } = params;
   console.log("From Single API");
   try {
     const data = await Semi.findOne({
@@ -22,18 +22,32 @@ export const GET = async (req, {params}) => {
   }
 };
 
-export const PUT = async (res, {params}) => {
-  const {id} = params;
+export const DELETE = async (res, { params }) => {
+  const { id } = params;
+  try {
+    await Semi.destroy({
+      where: {
+        id: id,
+      },
+    });
+    return NextResponse.json({ message: "Succesfull!!" }, { status: 201 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Faild to upadate seminar!!" },
+      { status: 500 }
+    );
+  }
+};
+
+export const PUT = async (res, { params }) => {
+  const { id } = params;
   try {
     const data = await res.json();
-    await Semi.update(
-      data,
-      {
-        where: {
-          id: id,
-        },
-      }
-    );
+    await Semi.update(data, {
+      where: {
+        id: id,
+      },
+    });
     return NextResponse.json({ message: "Succesfull!!" }, { status: 201 });
   } catch (error) {
     return NextResponse.json(

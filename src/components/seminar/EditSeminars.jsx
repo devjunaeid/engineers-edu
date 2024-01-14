@@ -10,6 +10,7 @@ function EditSeminars({ dbData, id }) {
     platfrom: dbData.platfrom || "",
     link: dbData.link || "",
   });
+  const [popup, setPopup] = useState(false);
   const [pending, setPending] = useState(false);
   const router = useRouter();
 
@@ -42,9 +43,27 @@ function EditSeminars({ dbData, id }) {
     }
   }
 
-//   useEffect(() => {
-//     handleChange();
-//   }, []);
+
+  const handleConfimation = () => {
+    setPopup(!popup);
+  }
+  const handleDelete = async (e) =>{
+    e.preventDefault();
+    try {
+      const res = await fetch(`http://localhost:3000/api/seminars/${id}`, {
+        method: "DELETE",
+      });
+
+      if (res.ok) {
+        setInterval(router.push("/admin/seminars"), 1000);
+      } else {
+        const error = await res.json();
+        console.log(error.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div>
@@ -147,6 +166,14 @@ function EditSeminars({ dbData, id }) {
           </form>
         </div>
       </div>
+      <button disabled={popup == true} className="btn" onClick={handleConfimation}>Delete</button>
+      <div className={`${popup ? " h-fit w-fit absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-amber-50 rounded-md border border-amber-500 p-16": "hidden"}`}>
+      <h1 className="text-2xl text-center font-bold text-red-500">Do You want Delete?</h1>
+      <div className="frm gap-4 w-full mt-6">
+        <button className="btn btn-error flex-1 hover:bg-red-600" onClick={handleDelete}>Yes</button>
+        <button className="btn flex-1" onClick={handleConfimation}>Cancel</button>
+      </div>
+    </div>
     </div>
   );
 }

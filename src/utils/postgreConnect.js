@@ -105,4 +105,4 @@ export const User = sequelize.define(
 
 
 
-// await sequelize.sync({ alter: true });
+await sequelize.sync({ alter: true });

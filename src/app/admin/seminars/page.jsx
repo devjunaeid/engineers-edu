@@ -1,8 +1,8 @@
 import SeminarView from "@/components/Cards/SeminarView";
-import Link from "next/link"; 
-
+import Link from "next/link";
+export const revalidate = 0;
 async function getData() {
-  const res = await fetch("http://localhost:3000/api/seminars");
+  const res = await fetch(`http://localhost:3000/api/seminars`, {cache:"no-store"});
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
