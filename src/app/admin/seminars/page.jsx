@@ -1,16 +1,10 @@
 import SeminarView from "@/components/Cards/SeminarView";
+import { getSeminars } from "@/server/actions/actions";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import Link from "next/link";
-export const revalidate = 0;
-async function getData() {
-  const res = await fetch(`http://localhost:3000/api/seminars`, {cache:"no-store"});
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
 
 async function page() {
-  const data = await getData();
+  const data = await getSeminars();
   return (
     <div className="flex flex-col justify-center items-center mt-10">
       <h1 className="md:text-6xl font-bold uppercase text-center">
