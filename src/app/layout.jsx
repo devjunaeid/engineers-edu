@@ -3,6 +3,7 @@ import "./globals.css";
 import NextAuthProviderFn from "../providers/nextAuth";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
+import ReactQueryProviders from "@/providers/reactQuery";
 
 export const metadata = {
   title: "Engineer's Academy",
@@ -14,9 +15,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <NextAuthProviderFn>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
+          <ReactQueryProviders>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+            </ReactQueryProviders>
         </NextAuthProviderFn>
       </body>
     </html>
