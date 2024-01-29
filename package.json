@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.17.15",
+    "@tanstack/react-query-devtools": "^5.17.18",
     "bcrypt": "^5.1.1",
     "mongoose": "^8.0.3",
     "next": "^14.0.5-canary.55",
@@ -19,7 +21,8 @@
     "react-dom": "^18",
     "react-icons": "^4.12.0",
     "react-toastify": "^9.1.3",
-    "sequelize": "^6.35.2"
+    "sequelize": "^6.35.2",
+    "use-dehydrated-state": "^0.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
