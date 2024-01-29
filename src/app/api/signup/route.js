@@ -10,9 +10,7 @@ export const POST = async (req) => {
     console.log(user_name);
     const checkExsist = await User.findAll({
       where: {
-        user_id: {
-          [Op.eq]: user_id,
-        },
+        user_id: user_id
       },
     });
     console.log();
