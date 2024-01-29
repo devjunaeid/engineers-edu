@@ -1,8 +1,14 @@
+import UserList from '@/components/Cards/UserList';
+import { getUsers } from '@/server/actions/actions';
 import React from 'react'
 
-function page() {
+async function page() {
+  const data = await getUsers();
+
   return (
-    <div>User</div>
+    <div>
+      <UserList data={data}/>
+    </div>
   )
 }
 
