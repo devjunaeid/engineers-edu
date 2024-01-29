@@ -6,8 +6,17 @@ import FeatureCardList from "../components/FeatureCard/FeatureCardList";
 import Hero from "../components/Hero/Hero";
 import WhyChooseUs from "@/components/Cards/WhyChooseUs";
 import WhyWeAreTheBest from "@/components/Cards/WhyWeAreTheBest";
+import { getSeminars } from "@/server/actions/actions";
 
-export default function Home() {
+
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+
+export default async function Home() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["get-seminars"],
+    queryFn: getSeminars,
+  })
   return (
     <div className="min-h-screen">
       <Hero />
@@ -20,7 +29,9 @@ export default function Home() {
       </div>
       <div className="px-4  md:mx-20 py-10">
       <h1 className="text-center font-black font-trioBd text-4xl md:text-6xl mb-12">সেমিনারের সময়সূচি</h1>
+          <HydrationBoundary state={dehydrate(queryClient)}>
           <Seminar />
+          </HydrationBoundary>
       </div>
       <div className="px-4  md:mx-20 py-10">
       <h1 className="text-center font-black font-trioBd text-4xl md:text-6xl mb-12">কেন আমাদেরকেই বেছে নিবেন</h1>
