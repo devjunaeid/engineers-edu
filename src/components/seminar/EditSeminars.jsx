@@ -1,4 +1,5 @@
 "use client";
+import { setSeminars } from "@/server/actions/actions";
 import { redirect, useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -22,28 +23,17 @@ function EditSeminars({ dbData, id }) {
   async function handleSubmit(e) {
     e.preventDefault();
     handleChange;
-    try {
-      setPending(true);
-      const res = await fetch(`http://localhost:3000/api/seminars/${id}`, {
-        method: "PUT",
-        body: JSON.stringify(data),
-      });
-
-      if (res.ok) {
-        setPending(false);
-        setInterval(router.push("/admin/seminars"), 1000);
-      } else {
-        const error = await res.json();
-        setError(error.message);
-        setPending(false);
-      }
-    } catch (error) {
+    setPending(true);
+    const status = await setSeminars(id, data);
+    if(status.error || status.faild){
       setPending(false);
-      console.log(error);
+      console.log(status?.error, status?.faild);
+    }
+    if(status.success){
+      setPending(false);
+      setInterval(router.push("/admin/seminars"), 1000);
     }
   }
-
-
   const handleConfimation = () => {
     setPopup(!popup);
   }
